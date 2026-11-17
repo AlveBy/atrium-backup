@@ -16,6 +16,7 @@ use Atrium\Backup\SpatieConfig;
 use Atrium\Backup\Tests\TestCase;
 use Illuminate\Support\Facades\Notification;
 use Spatie\Backup\Notifications\Notifications\BackupHasFailedNotification;
+use Spatie\Backup\Support\BackupLogger;
 use ZipArchive;
 
 final class BackupTest extends TestCase
@@ -48,6 +49,19 @@ final class BackupTest extends TestCase
         $entry = app(Backups::class)->log()->recent(1)[0];
         $this->assertSame(['backup', 'ok'], [$entry['action'], $entry['status']]);
         $this->assertEqualsCanonicalizing(['backups', 'backups-copy'], $entry['disks']);
+    }
+
+    public function test_every_archive_is_opened_and_counted_after_it_is_packed(): void
+    {
+        $this->seedSite();
+        $messages = [];
+        app(BackupLogger::class)->onMessage(function (string $level, string $message) use (&$messages): void {
+            $messages[] = $message;
+        });
+
+        $this->artisan('atrium:backup:run')->assertSuccessful();
+
+        $this->assertNotEmpty(preg_grep('/^Backup verified: \d+ files in archive\.$/', $messages));
     }
 
     public function test_the_env_files_never_go_into_an_archive(): void
