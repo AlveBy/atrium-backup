@@ -1,0 +1,64 @@
+{
+    "name": "alveby/atrium-backup",
+    "description": "Backups for Atrium: database and files, several destinations, schedules, retention, health checks, restore from the admin",
+    "type": "atrium-module",
+    "license": "MIT",
+    "homepage": "https://github.com/AlveBy/atrium",
+    "support": {
+        "issues": "https://github.com/AlveBy/atrium/issues",
+        "source": "https://github.com/AlveBy/atrium"
+    },
+    "keywords": [
+        "laravel",
+        "admin",
+        "cms",
+        "backup",
+        "restore",
+        "mysql",
+        "postgresql",
+        "sqlite"
+    ],
+    "require": {
+        "php": "^8.3",
+        "ext-zip": "*",
+        "illuminate/support": "^13.0",
+        "alveby/atrium": "^0.1",
+        "spatie/laravel-backup": "^10.3"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^11.0",
+        "phpunit/phpunit": "^12.5"
+    },
+    "suggest": {
+        "league/flysystem-aws-s3-v3": "Backups to Amazon S3 or any S3-compatible storage",
+        "league/flysystem-ftp": "Backups to an FTP server",
+        "league/flysystem-sftp-v3": "Backups to an SFTP server",
+        "masbug/flysystem-google-drive-ext": "Backups to Google Drive",
+        "spatie/flysystem-dropbox": "Backups to Dropbox"
+    },
+    "autoload": {
+        "psr-4": {
+            "Atrium\\Backup\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Atrium\\Backup\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "atrium": {
+            "title": "atrium-backup::backup.menu"
+        },
+        "laravel": {
+            "providers": [
+                "Atrium\\Backup\\BackupServiceProvider"
+            ]
+        },
+        "branch-alias": {
+            "dev-main": "0.1.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
