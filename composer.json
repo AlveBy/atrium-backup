@@ -22,7 +22,7 @@
         "php": "^8.3",
         "ext-zip": "*",
         "illuminate/support": "^13.0",
-        "alveby/atrium": "^0.1",
+        "alveby/atrium": "^0.2",
         "spatie/laravel-backup": "^10.3"
     },
     "require-dev": {
@@ -56,7 +56,7 @@
             ]
         },
         "branch-alias": {
-            "dev-main": "0.1.x-dev"
+            "dev-main": "0.2.x-dev"
         }
     },
     "minimum-stability": "dev",
